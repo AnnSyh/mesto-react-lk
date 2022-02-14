@@ -12,7 +12,7 @@ function PopupWithForm({ title, name}) {
             <div className="popup__container">
                 <form className="form popup__form"
                     name={`${name}`}
-                    novalidate>
+                    noValidate>
                           {/* className="popup__close popup__close_add-plaсe" */}
                     <button 
                         className={`popup__close popup__close_${name}`}
@@ -25,8 +25,8 @@ function PopupWithForm({ title, name}) {
                             name="name"
                             type="text"
                             required
-                            minlength="2"
-                            maxlength="30" />
+                            minLength="2"
+                            maxLength="30" />
                         <span className="popup__input-error place-title-input-error"></span>
                     </div>
                     <div className="form__field">
