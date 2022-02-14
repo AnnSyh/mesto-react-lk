@@ -50,11 +50,25 @@ function App() {
     setCardData(cards)
   }
 
+  const handleEditAvatarClick = () => {
+    document.querySelector('.new-avatar__popup').classList.add('popup_opened');
+   }
+ const handleEditProfileClick = () => {
+    document.querySelector('.edit-profile__popup').classList.add('popup_opened');
+   }
+ const handleAddPlaceClick = () => {
+    document.querySelector('.add-plaсe__popup').classList.add('popup_opened');
+   }
+
   return (
     <>
       <Header />
       <main className="content">
-          <Profile />
+          <Profile handleEditAvatarClick={handleEditAvatarClick}
+                    handleEditProfileClick={handleEditProfileClick}
+                    handleAddPlaceClick={handleAddPlaceClick}
+          
+          />
 
           <section className="cards section content__section ">
             <div className="list-template-inner">

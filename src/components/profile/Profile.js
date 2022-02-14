@@ -3,19 +3,7 @@ import avatar from '../../images/avatar.jpg';
 import Button from '../button/button';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-function Profile() {
-
-    const handleEditAvatarClick = () => {
-       document.querySelector('.new-avatar__popup').classList.add('popup_opened');
-      }
-    const handleEditProfileClick = () => {
-       document.querySelector('.edit-profile__popup').classList.add('popup_opened');
-      }
-    const handleAddPlaceClick = () => {
-       document.querySelector('.add-plaсe__popup').classList.add('popup_opened');
-      }
-
-
+function Profile({handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick}) {
 
   return (
 
