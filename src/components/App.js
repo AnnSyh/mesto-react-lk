@@ -2,13 +2,13 @@ import React from 'react';
 import '../components/App.css';
 import Header from './header/Header';
 import Footer from './footer/Footer';
-import AppContainer from './AppContainer/AppContainer';
+import Main from './main/Main';
 
 function App() {
   return (
     <>
       <Header />
-      <AppContainer />
+      <Main />
       <Footer />
     </>
   );

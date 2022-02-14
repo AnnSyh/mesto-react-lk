@@ -4,9 +4,9 @@ import React from 'react';
 function Cards() {
   return (
 
-    <section class="cards section content__section ">
-        <div class="list-template-inner">
-            <ul class="cards__list list-template-place">
+    <section className="cards section content__section ">
+        <div className="list-template-inner">
+            <ul className="cards__list list-template-place">
             </ul>
         </div>
     </section>

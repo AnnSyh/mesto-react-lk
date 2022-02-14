@@ -2,9 +2,10 @@ import React from 'react';
 // import arkhyz from 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg';
 import arkhyz from '../../images/avatar.jpg';
 
-function Header() {
+function Footer() {
+
   return (
-    <div>
+    <>
         <footer className="footer section page__footer">
             <p className="footer__copyright">©&nbsp;2021&nbsp;Mesto&nbsp;Russia</p>
         </footer>
@@ -15,7 +16,7 @@ function Header() {
                 <div className="popup__container">
                     <form className="form popup__form"
                         name="add-place"
-                        novalidate>
+                        noValidate>
                         <button className="popup__close popup__close_add-plaсe"
                             type="button"></button>
                         <h2 className="page-title popup__page-title  text-overflow">Новое место</h2>
@@ -26,8 +27,8 @@ function Header() {
                                 name="name"
                                 type="text"
                                 required
-                                minlength="2"
-                                maxlength="30" />
+                                minLength="2"
+                                maxLength="30" />
                             <span className="popup__input-error place-title-input-error"></span>
                         </div>
                         <div className="form__field">
@@ -54,7 +55,7 @@ function Header() {
                 <div className="popup__container">
                     <form className="form popup__form"
                         name="edit-profile"
-                        novalidate>
+                        noValidate>
                         <button className="popup__close popup__close_edit-profile"
                             type="button"></button>
                         <h2 className="page-title popup__page-title  text-overflow">Редактировать профиль</h2>
@@ -64,8 +65,8 @@ function Header() {
                                 className="popup__input popup__input_user-title"
                                 name="title"
                                 required
-                                minlength="2"
-                                maxlength="40"
+                                minLength="2"
+                                maxLength="40"
                                 type="text" />
                             <span className="popup__input-error user-title-error"></span>
                         </div>
@@ -75,8 +76,8 @@ function Header() {
                                 className="popup__input popup__input_user-subtitle"
                                 name="subtitle"
                                 required
-                                minlength="2"
-                                maxlength="200"
+                                minLength="2"
+                                maxLength="200"
                                 type="text" />
                             <span className="popup__input-error user-subtitle-error"></span>
                         </div>
@@ -113,7 +114,7 @@ function Header() {
                 <div className="popup__container">
                     <form className="form popup__form"
                         name="confirmation"
-                        novalidate>
+                        noValidate>
                         <button className="popup__close popup__close_add-plaсe"
                             type="button"></button>
                         <h2 className="page-title popup__page-title  text-overflow">Вы уверены?</h2>
@@ -132,7 +133,7 @@ function Header() {
                 <div className="popup__container">
                     <form className="form popup__form"
                         name="avatar"
-                        novalidate>
+                        noValidate>
                         <button className="popup__close popup__close_add-plaсe"
                             type="button"></button>
                         <h2 className="page-title popup__page-title  text-overflow">Обновить аватар</h2>
@@ -180,9 +181,9 @@ function Header() {
             </li>
         </template>
 
-    </div>
+    </>
 
   );
 }
 
-export default Header;
+export default Footer;
