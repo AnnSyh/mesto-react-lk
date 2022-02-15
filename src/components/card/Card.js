@@ -1,9 +1,12 @@
 import React from 'react';
 
-function Card({ title, alt, src }) {
+
+function Card({ handleCardClick, title, src }) {
     return (
         <li className="cards__item">
-            <div className="cards__pic">
+            <div className="cards__pic" 
+                 onClick={handleCardClick}
+             >
                 <img className="cards__img" 
                         data-popup="open-img__popup" 
                         src={src}

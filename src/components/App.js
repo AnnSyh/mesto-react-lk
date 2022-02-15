@@ -4,6 +4,7 @@ import Header from './header/Header';
 import Footer from './footer/Footer';
 import Profile from './profile/Profile';
 import PopupWithForm from './PopupWithForm/PopupWithForm';
+import ImgPopup from './imgPopup/ImgPopup';
 import Card from './card/Card';
 
 let cards = [
@@ -38,52 +39,87 @@ function App() {
   const [pictureLink, setPictureLink] = React.useState('https://cdn.fishki.net/upload/post/2021/02/02/3586907/tn/8-11.jpg');
   //устанавливаем нач набор карточек из массива
   const [cardData, setCardData] = React.useState(cards)
-  const updateCards = () => {
-    const data = {
-      "id": "jaH3QF46gAY" + Math.random(),
-      "src": pictureLink,
-      "alt": "Some picture",
-      "title": "Some picture",
-      "subtitle": "Anonymous"
-    }
-    addCardToDB(data)
-    setCardData(cards)
-  }
 
-  const handleEditAvatarClick = () => {
-    document.querySelector('.new-avatar__popup').classList.add('popup_opened');
-   }
- const handleEditProfileClick = () => {
-    document.querySelector('.edit-profile__popup').classList.add('popup_opened');
-   }
- const handleAddPlaceClick = () => {
-    document.querySelector('.add-plaсe__popup').classList.add('popup_opened');
-   }
+  const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = React.useState(false)
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
+
+  const [selectedCard, setSelectedCard] = React.useState(null); // или пустой объект передать
+  const handleCardClick = (card) => {
+    debugger
+    console.log('card handleCardClick')
+    console.log('selectedCard = ',selectedCard)
+    console.log('card = ',card)
+    console.log('card.title = ',card.title)
+    console.log('card.src = ',card.src)
+    setSelectedCard(card)
+  };
+
+  const handleEditAvatarClick = () => { document.querySelector('.new-avatar__popup').classList.add('popup_opened');}
+  const handleEditProfileClick = () => { document.querySelector('.edit-profile__popup').classList.add('popup_opened');}
+  const handleAddPlaceClick = () => {document.querySelector('.add-plaсe__popup').classList.add('popup_opened');}
 
   return (
     <>
       <Header />
       <main className="content">
-          <Profile handleEditAvatarClick={handleEditAvatarClick}
-                    handleEditProfileClick={handleEditProfileClick}
-                    handleAddPlaceClick={handleAddPlaceClick}
-          
-          />
+        <Profile handleEditAvatarClick={handleEditAvatarClick}
+          handleEditProfileClick={handleEditProfileClick}
+          handleAddPlaceClick={handleAddPlaceClick}
+        />
 
-          <section className="cards section content__section ">
-            <div className="list-template-inner">
-                <ul className="cards__list list-template-place">
-
-                  { cardData.map(({ id, ...props }) => <Card key={id} {...props} />) }
-
-                </ul>
-            </div>
-          </section>
+        <section className="cards section content__section ">
+          <div className="list-template-inner">
+          <ul className="cards__list list-template-place">
+              {cardData.map(({ id, ...card }) => {
+                  return (
+                    <Card  key={id} handleCardClick={() => handleCardClick(card)} {...card} />
+                  );
+              })}
+          </ul>
+          </div>
+        </section>
       </main>
 
       <Footer />
 
-      <PopupWithForm></PopupWithForm>
+      <ImgPopup caption={'картинка'}
+        src={'https://cdn.fishki.net/upload/post/2021/02/02/3586907/tn/8-11.jpg'}
+        >
+        </ImgPopup>
+
+
+      <PopupWithForm props title={'Редактировать профиль'} name={'edit-profile'} >
+        <div className="form__field">
+          <input placeholder="Имя" id="user-title" className="popup__input popup__input_user-title" name="title" required="" minLength="2" maxLength="40" /> 
+          <span className="popup__input-error user-title-error"></span>
+        </div>
+        <div className="form__field">
+          <input placeholder="О себе" id="user-subtitle" className="popup__input popup__input_user-subtitle" name="subtitle" required="" minLength="2" maxLength="200" /> 
+          <span className="popup__input-error user-subtitle-error"></span>
+        </div>
+      </PopupWithForm>
+      <PopupWithForm title={'Новое место'} name={'add-plaсe'}>
+        <div className="form__field">
+          <input placeholder="название" id="place-title-input" className="popup__input popup__input_plaсe-title" name="name" required="" minLength="2" maxLength="30" /> 
+          <span className="popup__input-error place-title-input-error"></span>
+          </div>
+        <div className="form__field">
+          <input placeholder="ссылка на картинку" id="plaсe-img-input" className="popup__input popup__input_plaсe-img" name="link" required="" type="url" /> 
+          <span className="popup__input-error plaсe-img-input-error"></span>
+        </div>
+      </PopupWithForm>
+      <PopupWithForm title={'Обновить аватар'} name={'new-avatar'}>
+        <div className="form__field">
+          <input placeholder="ссылка на изображение аватара" id="avatar-input" className="popup__input popup__input_avatar-img" name="avatar-src" required="" type="url" /> 
+          <span className="popup__input-error plaсe-img-input-error"></span>
+        </div>
+      </PopupWithForm>
+
+      <PopupWithForm title={'Вы уверены?'} name={'confirmation'}>
+        <button className="popup__btn confirmation-btn" name="btn" type="submit" value="Согласиться">Да</button>
+      </PopupWithForm>
+
 
     </>
   );

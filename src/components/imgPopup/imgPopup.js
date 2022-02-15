@@ -1,10 +1,10 @@
 import React from 'react';
 
-function imgPopup({ caption, src, handleClickImg}) {
+function ImgPopup({ caption, src}) {
   return (
 
     <div className="open-img">
-        <div className="popup open-img__popup">
+        <div className="popup open-img__popup popup_opened1">
             <div className="popup__overlay"></div>
             <div className="popup__container">
                 <div className="popup__body">
@@ -24,4 +24,4 @@ function imgPopup({ caption, src, handleClickImg}) {
   );
 }
 
-export default imgPopup;
+export default ImgPopup;

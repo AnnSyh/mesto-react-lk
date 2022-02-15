@@ -16,9 +16,6 @@ function Profile({handleEditAvatarClick, handleEditProfileClick, handleAddPlaceC
                 <Button title="" 
                         btnClass="profile__btn profile__btn_user-edit profile__btn_avatar-edit  link-hover" 
                         handleClick={handleEditAvatarClick}/>
-                {/* <button type="button"
-                    className="profile__btn profile__btn_user-edit profile__btn_avatar-edit  link-hover"
-                    data-popup="edit-profile__popup"></button> */}
             </div>
 
             <div className="profile__info">
@@ -28,9 +25,6 @@ function Profile({handleEditAvatarClick, handleEditProfileClick, handleAddPlaceC
                     <Button title="" 
                             btnClass="profile__btn profile__btn_user-edit btn-user-edit link-hover" 
                             handleClick={handleEditProfileClick}/>
-                    {/* <button type="button"
-                        className="profile__btn profile__btn_user-edit btn-user-edit link-hover"
-                        data-popup="edit-profile__popup"></button> */}
                 </div>
                 <p className="profile__job text-overflow"></p>
             </div>
@@ -40,10 +34,6 @@ function Profile({handleEditAvatarClick, handleEditProfileClick, handleAddPlaceC
         <Button title="+" 
                 btnClass="profile__btn profile__btn_user-add link-hover" 
                 handleClick={handleAddPlaceClick}/>
-
-        {/* <button type="submit"
-            className="profile__btn profile__btn_user-add link-hover"
-            data-popup="add-plaсe__popup"></button> */}
     </section>
 
   );
