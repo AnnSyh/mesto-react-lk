@@ -4,7 +4,7 @@ import Header from './header/Header';
 import Footer from './footer/Footer';
 import Profile from './profile/Profile';
 import PopupWithForm from './PopupWithForm/PopupWithForm';
-import ImgPopup from './imgPopup/ImgPopup';
+import ImgPopup from './imgPopup/imgPopup';
 import Card from './card/Card';
 
 let cards = [
@@ -48,15 +48,21 @@ function App() {
   const handleEditProfileClick = () => { document.querySelector('.edit-profile__popup').classList.add('popup_opened');}
   const handleAddPlaceClick = () => {document.querySelector('.add-plaсe__popup').classList.add('popup_opened');}
 
-  const [selectedCard, setSelectedCard] = React.useState(null); // или пустой объект передать
+  const [selectedCard, setSelectedCard] = React.useState({}); 
   const handleCardClick = (card) => {
-    debugger
-    console.log('card handleCardClick')
-    console.log('selectedCard = ',selectedCard)
-    console.log('card = ',card)
     console.log('card.title = ',card.title)
     console.log('card.src = ',card.src)
     setSelectedCard(card)
+    console.log('selectedCard = ',selectedCard)
+    console.log('setSelectedCard = ',setSelectedCard)
+  };
+
+  const closeAllPopups = () => {
+    console.log('closeAllPopups');
+    setIsAddPlacePopupOpen(false);
+    // setIsEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setSelectedCard(null);
   };
 
   return (
@@ -83,17 +89,22 @@ function App() {
 
       <Footer />
 
-      {setSelectedCard ? console.log('setSelectedCard = ',setSelectedCard) : null}
-     
-      <ImgPopup card={setSelectedCard}/>
+      {setSelectedCard ? <ImgPopup card={selectedCard} /> : null}
+222222222222222222
+      <ImgPopup caption={setSelectedCard.caption} src={setSelectedCard.src}/>
+11111111111111111111111
+       <ImgPopup caption={'картинка'}
+                src={'https://cdn.fishki.net/upload/post/2021/02/02/3586907/tn/8-11.jpg'}
+        >
+        </ImgPopup>
 
       {/* <ImgPopup caption={'картинка'}
-        src={'https://cdn.fishki.net/upload/post/2021/02/02/3586907/tn/8-11.jpg'}
+                src={'https://cdn.fishki.net/upload/post/2021/02/02/3586907/tn/8-11.jpg'}
         >
-        </ImgPopup> */}
+        </ImgPopup>  */}
 
 
-      <PopupWithForm props title={'Редактировать профиль'} name={'edit-profile'} >
+      <PopupWithForm onClose={closeAllPopups} title={'Редактировать профиль'} name={'edit-profile'} >
         <div className="form__field">
           <input placeholder="Имя" id="user-title" className="popup__input popup__input_user-title" name="title" required="" minLength="2" maxLength="40" /> 
           <span className="popup__input-error user-title-error"></span>
