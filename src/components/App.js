@@ -44,6 +44,10 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
 
+  const handleEditAvatarClick = () => { document.querySelector('.new-avatar__popup').classList.add('popup_opened');}
+  const handleEditProfileClick = () => { document.querySelector('.edit-profile__popup').classList.add('popup_opened');}
+  const handleAddPlaceClick = () => {document.querySelector('.add-plaсe__popup').classList.add('popup_opened');}
+
   const [selectedCard, setSelectedCard] = React.useState(null); // или пустой объект передать
   const handleCardClick = (card) => {
     debugger
@@ -54,10 +58,6 @@ function App() {
     console.log('card.src = ',card.src)
     setSelectedCard(card)
   };
-
-  const handleEditAvatarClick = () => { document.querySelector('.new-avatar__popup').classList.add('popup_opened');}
-  const handleEditProfileClick = () => { document.querySelector('.edit-profile__popup').classList.add('popup_opened');}
-  const handleAddPlaceClick = () => {document.querySelector('.add-plaсe__popup').classList.add('popup_opened');}
 
   return (
     <>
@@ -83,10 +83,14 @@ function App() {
 
       <Footer />
 
-      <ImgPopup caption={'картинка'}
+      {setSelectedCard ? console.log('setSelectedCard = ',setSelectedCard) : null}
+     
+      <ImgPopup card={setSelectedCard}/>
+
+      {/* <ImgPopup caption={'картинка'}
         src={'https://cdn.fishki.net/upload/post/2021/02/02/3586907/tn/8-11.jpg'}
         >
-        </ImgPopup>
+        </ImgPopup> */}
 
 
       <PopupWithForm props title={'Редактировать профиль'} name={'edit-profile'} >
