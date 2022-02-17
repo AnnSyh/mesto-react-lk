@@ -19,7 +19,9 @@ function ImgPopup(props) {
                         <img className="popup__img"
                             src={props.src}
                             alt={props.caption} />
-                        <figcaption className="popup__caption">{props.caption}</figcaption>
+                        <figcaption className="popup__caption">
+                            {props.caption}
+                        </figcaption>
                     </figure>
                 </div>
             </div>

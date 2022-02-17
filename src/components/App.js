@@ -50,11 +50,15 @@ function App() {
 
   const [selectedCard, setSelectedCard] = React.useState({}); 
   const handleCardClick = (card) => {
-    console.log('card.title = ',card.title)
-    console.log('card.src = ',card.src)
+    // console.log('card = ', card)
+    // console.log('card.title = ',card.title)
+    // console.log('card.src = ',card.src)
     setSelectedCard(card)
-    console.log('selectedCard = ',selectedCard)
-    console.log('setSelectedCard = ',setSelectedCard)
+    // console.log('selectedCard = ',selectedCard)
+    // console.log('selectedCard.src = ',selectedCard.src)
+    // console.log('selectedCard.alt = ',selectedCard.alt)
+    // console.log('setSelectedCard = ',setSelectedCard)
+    document.querySelector('.open-img__popup').classList.add('popup_opened');
   };
 
   const closeAllPopups = () => {
@@ -89,19 +93,7 @@ function App() {
 
       <Footer />
 
-      {setSelectedCard ? <ImgPopup card={selectedCard} /> : null}
-222222222222222222
-      <ImgPopup caption={setSelectedCard.caption} src={setSelectedCard.src}/>
-11111111111111111111111
-       <ImgPopup caption={'картинка'}
-                src={'https://cdn.fishki.net/upload/post/2021/02/02/3586907/tn/8-11.jpg'}
-        >
-        </ImgPopup>
-
-      {/* <ImgPopup caption={'картинка'}
-                src={'https://cdn.fishki.net/upload/post/2021/02/02/3586907/tn/8-11.jpg'}
-        >
-        </ImgPopup>  */}
+      {setSelectedCard ? <ImgPopup caption={selectedCard.alt} src={selectedCard.src}/> : null}
 
 
       <PopupWithForm onClose={closeAllPopups} title={'Редактировать профиль'} name={'edit-profile'} >
