@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ImgePopup(props) {
+function ImagePopup(props) {
 
     return (
 
@@ -29,4 +29,4 @@ function ImgePopup(props) {
     );
 }
 
-export default ImgePopup;
+export default ImagePopup;
