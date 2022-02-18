@@ -40,42 +40,53 @@ function App() {
   //устанавливаем нач набор карточек из массива
   const [cardData, setCardData] = React.useState(cards)
 
-  const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = React.useState(false)
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
+  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = React.useState(false)
+  const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = React.useState(false)
+  const [isConfirmPopupOpen, setisConfirmPopupOpen] = React.useState(false)
+  const [isImgPopupOpen, setisImgPopupOpen] = React.useState(false)
 
-  const handleEditAvatarClick = () => { document.querySelector('.new-avatar__popup').classList.add('popup_opened');}
-  const handleEditProfileClick = () => { document.querySelector('.edit-profile__popup').classList.add('popup_opened');}
-  const handleAddPlaceClick = () => {document.querySelector('.add-plaсe__popup').classList.add('popup_opened');}
+  const handleEditAvatarClick = () => { 
+    setIsEditAvatarPopupOpen(true)
+   }
+   const handleAddPlaceClick = () => {
+     setisAddPlacePopupOpen(true)
+   }
+  const handleEditProfileClick = () => { 
+    setisEditProfilePopupOpen(true)
+  }
+  const handleConfirmClick = () => { 
+    setisConfirmPopupOpen(true)
+  }
+  const handleImgPopupOpen = () => { 
+    setisImgPopupOpen(true)
+  }
 
   const [selectedCard, setSelectedCard] = React.useState({}); 
   const handleCardClick = (card) => {
-    // console.log('card = ', card)
-    // console.log('card.title = ',card.title)
-    // console.log('card.src = ',card.src)
     setSelectedCard(card)
-    // console.log('selectedCard = ',selectedCard)
-    // console.log('selectedCard.src = ',selectedCard.src)
-    // console.log('selectedCard.alt = ',selectedCard.alt)
-    // console.log('setSelectedCard = ',setSelectedCard)
-    document.querySelector('.open-img__popup').classList.add('popup_opened');
+    setisImgPopupOpen(true)
+    // document.querySelector('.open-img__popup').classList.add('popup_opened');
   };
 
   const closeAllPopups = () => {
     console.log('closeAllPopups');
-    setIsAddPlacePopupOpen(false);
-    // setIsEditProfilePopupOpen(false);
+    setisAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard(null);
+    setisEditProfilePopupOpen(false);
+    setisConfirmPopupOpen(false);
+    setisImgPopupOpen(false);
   };
 
   return (
     <>
       <Header />
       <main className="content">
-        <Profile handleEditAvatarClick={handleEditAvatarClick}
-          handleEditProfileClick={handleEditProfileClick}
-          handleAddPlaceClick={handleAddPlaceClick}
+        <Profile  handleEditAvatarClick={handleEditAvatarClick}
+                  handleEditProfileClick={handleEditProfileClick}
+                  handleAddPlaceClick={handleAddPlaceClick}
+                  handleConfirmClick={handleConfirmClick}
+                  handleImgPopupOpen={handleImgPopupOpen}
         />
 
         <section className="cards section content__section ">
@@ -93,10 +104,17 @@ function App() {
 
       <Footer />
 
-      {setSelectedCard ? <ImgPopup caption={selectedCard.alt} src={selectedCard.src}/> : null}
+      {setSelectedCard ? <ImgPopup onClose={closeAllPopups} 
+                                   isOpen={isImgPopupOpen} 
+                                   caption={selectedCard.alt} 
+                                   src={selectedCard.src}/> : null}
 
 
-      <PopupWithForm onClose={closeAllPopups} title={'Редактировать профиль'} name={'edit-profile'} >
+      <PopupWithForm  onClose={closeAllPopups} 
+                      isOpen={isEditProfilePopupOpen}  
+                      title={'Редактировать профиль'} 
+                      name={'edit-profile'} 
+      >
         <div className="form__field">
           <input placeholder="Имя" id="user-title" className="popup__input popup__input_user-title" name="title" required="" minLength="2" maxLength="40" /> 
           <span className="popup__input-error user-title-error"></span>
@@ -106,7 +124,11 @@ function App() {
           <span className="popup__input-error user-subtitle-error"></span>
         </div>
       </PopupWithForm>
-      <PopupWithForm title={'Новое место'} name={'add-plaсe'}>
+      <PopupWithForm  onClose={closeAllPopups}
+                      isOpen={isAddPlacePopupOpen}  
+                      title={'Новое место'} 
+                      name={'add-plaсe'}
+      >
         <div className="form__field">
           <input placeholder="название" id="place-title-input" className="popup__input popup__input_plaсe-title" name="name" required="" minLength="2" maxLength="30" /> 
           <span className="popup__input-error place-title-input-error"></span>
@@ -116,14 +138,22 @@ function App() {
           <span className="popup__input-error plaсe-img-input-error"></span>
         </div>
       </PopupWithForm>
-      <PopupWithForm title={'Обновить аватар'} name={'new-avatar'}>
+      <PopupWithForm  onClose={closeAllPopups} 
+                      isOpen={isEditAvatarPopupOpen} 
+                      title={'Обновить аватар'} 
+                      name={'new-avatar'}
+      >
         <div className="form__field">
           <input placeholder="ссылка на изображение аватара" id="avatar-input" className="popup__input popup__input_avatar-img" name="avatar-src" required="" type="url" /> 
           <span className="popup__input-error plaсe-img-input-error"></span>
         </div>
       </PopupWithForm>
 
-      <PopupWithForm title={'Вы уверены?'} name={'confirmation'}>
+      <PopupWithForm  onClose={closeAllPopups} 
+                      isOpen={isConfirmPopupOpen}
+                      title={'Вы уверены?'} 
+                      name={'confirmation'}
+      >
         <button className="popup__btn confirmation-btn" name="btn" type="submit" value="Согласиться">Да</button>
       </PopupWithForm>
 
