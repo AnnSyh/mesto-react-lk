@@ -4,8 +4,8 @@ function ImgPopup(props) {
     // debugger
 
 // console.log('ImgPopup props= ',props);
-// console.log('ImgPopup props.src= ',props.src);
-// console.log('ImgPopup props.caption= ',props.caption);
+// console.log('ImgPopup props.link= ',props.link);
+// console.log('ImgPopup props.name= ',props.name);
 // console.log('ImgPopup props.onClose= ',props.onClose);
 // console.log('ImgPopup props.isOpen= ',props.isOpen);
 
@@ -27,10 +27,10 @@ function ImgPopup(props) {
                         </button>
                         <figure className="popup__figure">
                             <img className="popup__img"
-                                src={props.src}
-                                alt={props.caption} />
+                                src={props.link}
+                                alt={props.name} />
                             <figcaption className="popup__caption">
-                                {props.caption}
+                                {props.name}
                             </figcaption>
                         </figure>
                     </div>

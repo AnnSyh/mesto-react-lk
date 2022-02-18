@@ -125,10 +125,10 @@ function App() {
 
       {setSelectedCard ? <ImgPopup onClose={closeAllPopups} 
                                    isOpen={isImgPopupOpen} 
-                                   caption={selectedCard.alt} 
-                                   src={selectedCard.src}/> : null}
+                                   name={selectedCard.name} 
+                                   link={selectedCard.link}/> : null}
 
-
+{/* попап Редактировать профиль */}
       <PopupWithForm  onClose={closeAllPopups} 
                       isOpen={isEditProfilePopupOpen}  
                       title={'Редактировать профиль'} 
@@ -143,6 +143,8 @@ function App() {
           <span className="popup__input-error user-subtitle-error"></span>
         </div>
       </PopupWithForm>
+
+{/* попап добавления карточки       */}
       <PopupWithForm  onClose={closeAllPopups}
                       isOpen={isAddPlacePopupOpen}  
                       title={'Новое место'} 
@@ -157,6 +159,8 @@ function App() {
           <span className="popup__input-error plaсe-img-input-error"></span>
         </div>
       </PopupWithForm>
+
+{/* попап Обновить аватар       */}
       <PopupWithForm  onClose={closeAllPopups} 
                       isOpen={isEditAvatarPopupOpen} 
                       title={'Обновить аватар'} 
@@ -168,6 +172,7 @@ function App() {
         </div>
       </PopupWithForm>
 
+{/* попап с удалением карточки */}
       <PopupWithForm  onClose={closeAllPopups} 
                       isOpen={isConfirmPopupOpen}
                       title={'Вы уверены?'} 
