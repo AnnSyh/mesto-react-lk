@@ -11,16 +11,11 @@ function ImgPopup(props) {
 
     return (
 
-        //   <div className={`${props.name}`}>
-        //     <div className="popup open-img__popup popup_opened1">
         <div className="open-img">
             <div className={`popup open-img__popup  ${props.isOpen && "popup_opened"}`}>
                 <div className="popup__overlay"></div>
                 <div className="popup__container">
                     <div className="popup__body">
-
-                        {/* <div>props ={props.card.src}</div> */}
-
                         <button className="popup__close popup__close-img"
                             type="button"
                             onClick={props.onClose}>
