@@ -3,11 +3,11 @@ import React from 'react';
 function ImgPopup(props) {
     // debugger
 
-console.log('ImgPopup props= ',props);
-console.log('ImgPopup props.src= ',props.src);
-console.log('ImgPopup props.caption= ',props.caption);
-console.log('ImgPopup props.onClose= ',props.onClose);
-console.log('ImgPopup props.isOpen= ',props.isOpen);
+// console.log('ImgPopup props= ',props);
+// console.log('ImgPopup props.src= ',props.src);
+// console.log('ImgPopup props.caption= ',props.caption);
+// console.log('ImgPopup props.onClose= ',props.onClose);
+// console.log('ImgPopup props.isOpen= ',props.isOpen);
 
     return (
 

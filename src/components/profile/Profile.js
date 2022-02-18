@@ -1,9 +1,32 @@
 import React from 'react';
 import avatar from '../../images/avatar.jpg';
 import Button from '../button/button';
-import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import api from  '../../utils/api.js';
+
+
 
 function Profile({handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick}) {
+
+// debugger
+
+const [userName, setUserName] = React.useState('Имя пользователя');
+const [userDescription, setUserDescription] = React.useState('О пользователе');
+const [userAvatar, setUserAvatar] = React.useState(avatar);
+  
+    React.useEffect(() => {
+
+      api.getUser()
+        .then((userData) => {
+            // console.log('userData = ',userData)
+            setUserName(userData.name);
+            setUserDescription(userData.about);
+            setUserAvatar(userData.avatar);
+        })
+        .catch((err) => console.log(err));
+
+    }, []);
+
+    
 
   return (
 
@@ -11,7 +34,7 @@ function Profile({handleEditAvatarClick, handleEditProfileClick, handleAddPlaceC
         <div className="profile__user">
             <div className="profile__pic btn-avatar-edit">
                 <img className="profile__img"
-                    src={avatar}
+                    src={userAvatar}
                     alt="аватар" />
                 <Button title="" 
                         btnClass="profile__btn profile__btn_user-edit profile__btn_avatar-edit  link-hover" 
@@ -20,13 +43,13 @@ function Profile({handleEditAvatarClick, handleEditProfileClick, handleAddPlaceC
 
             <div className="profile__info">
                 <div className="profile__edit">
-                    <h1 className="profile__name text-overflow"></h1>
+                    <h1 className="profile__name text-overflow">{userName}</h1>
 
                     <Button title="" 
                             btnClass="profile__btn profile__btn_user-edit btn-user-edit link-hover" 
                             handleClick={handleEditProfileClick}/>
                 </div>
-                <p className="profile__job text-overflow"></p>
+                <p className="profile__job text-overflow">{userDescription}</p>
             </div>
 
         </div>
