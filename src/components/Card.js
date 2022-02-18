@@ -1,13 +1,8 @@
 import React from 'react';
 
 function Card(props) {
-    
-    // console.log('Card props= ',props);
-    // console.log('Card props.link= ',props.link);
-    // console.log('Card props.name= ',props.name);
 
     function handleCardClick() {
-        console.log('handleCardClick');
         props.handleCardClick(props);
       }    
 

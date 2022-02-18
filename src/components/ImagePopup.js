@@ -1,13 +1,6 @@
 import React from 'react';
 
 function ImgPopup(props) {
-    // debugger
-
-// console.log('ImgPopup props= ',props);
-// console.log('ImgPopup props.link= ',props.link);
-// console.log('ImgPopup props.name= ',props.name);
-// console.log('ImgPopup props.onClose= ',props.onClose);
-// console.log('ImgPopup props.isOpen= ',props.isOpen);
 
     return (
 

@@ -2,10 +2,6 @@ import React from 'react';
 
 function PopupWithForm(props) {
 
-// console.log('props= ',props);
-// console.log('props.onClose= ',props.onClose);
-// console.log('props.isOpen= ',props.isOpen);
-
   return (
 
     <div className={`${props.name}`}>

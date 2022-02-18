@@ -1,13 +1,9 @@
 import React from 'react';
-import avatar from '../../images/avatar.jpg';
-import Button from '../button/button';
-import api from  '../../utils/api.js';
+import avatar from '../images/avatar.jpg';
+import Button from './button';
+import api from  '../utils/api.js';
 
-
-
-function Profile({handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick}) {
-
-// debugger
+function Main({handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick}) {
 
 const [userName, setUserName] = React.useState('Имя пользователя');
 const [userDescription, setUserDescription] = React.useState('О пользователе');
@@ -25,8 +21,6 @@ const [userAvatar, setUserAvatar] = React.useState(avatar);
         .catch((err) => console.log(err));
 
     }, []);
-
-    
 
   return (
 
@@ -62,4 +56,4 @@ const [userAvatar, setUserAvatar] = React.useState(avatar);
   );
 }
 
-export default Profile;
+export default Main;
