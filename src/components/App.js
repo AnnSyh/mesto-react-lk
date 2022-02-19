@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/App.css';
+import { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
@@ -9,14 +9,12 @@ import Card from './Card';
 import api from  '../utils/api';
 
 function App() {
-  //сохраняем ссылку на картинку вводимую в input(это для формы добавления эл-та)
-  const [pictureLink, setPictureLink] = React.useState('https://cdn.fishki.net/upload/post/2021/02/02/3586907/tn/8-11.jpg');
 
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
-  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = React.useState(false)
-  const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = React.useState(false)
-  const [isConfirmPopupOpen, setisConfirmPopupOpen] = React.useState(false)
-  const [isImagePopupOpen, setisImagePopupOpen] = React.useState(false)
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
+  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = useState(false)
+  const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = useState(false)
+  const [isConfirmPopupOpen, setisConfirmPopupOpen] = useState(false)
+  const [isImagePopupOpen, setisImagePopupOpen] = useState(false)
 
   const handleEditAvatarClick = () => { 
     setIsEditAvatarPopupOpen(true)
@@ -34,7 +32,7 @@ function App() {
     setisImagePopupOpen(true)
   }
 
-  const [selectedCard, setSelectedCard] = React.useState({}); 
+  const [selectedCard, setSelectedCard] = useState({}); 
   const handleCardClick = (card) => {
     setSelectedCard(card)
     setisImagePopupOpen(true)
@@ -51,9 +49,9 @@ function App() {
   };
 
 
-  const [cards , setCards ] = React.useState([]);
+  const [cards , setCards ] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
 
     api.getInitialCards()
       .then((cards) => {

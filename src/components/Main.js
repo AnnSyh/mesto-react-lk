@@ -1,15 +1,16 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import avatar from '../images/avatar.jpg';
 import Button from './button';
 import api from  '../utils/api.js';
 
 function Main({handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick}) {
 
-const [userName, setUserName] = React.useState('Имя пользователя');
-const [userDescription, setUserDescription] = React.useState('О пользователе');
-const [userAvatar, setUserAvatar] = React.useState(avatar);
+const [userName, setUserName] = useState('Имя пользователя');
+const [userDescription, setUserDescription] = useState('О пользователе');
+const [userAvatar, setUserAvatar] = useState(avatar);
   
-    React.useEffect(() => {
+    useEffect(() => {
 
       api.getUser()
         .then((userData) => {
