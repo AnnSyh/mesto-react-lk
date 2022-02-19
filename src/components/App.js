@@ -16,27 +16,34 @@ function App() {
 
   const handleEditAvatarClick = () => { 
     setIsEditAvatarPopupOpen(true)
+    componentDidMount()         //устанавливаем событие при нажатии клавиши Esc
    }
    const handleAddPlaceClick = () => {
      setisAddPlacePopupOpen(true)
+     componentDidMount()         //устанавливаем событие при нажатии клавиши Esc
    }
   const handleEditProfileClick = () => { 
     setisEditProfilePopupOpen(true)
+    componentDidMount()         //устанавливаем событие при нажатии клавиши Esc
   }
   const handleConfirmClick = () => { 
     setisConfirmPopupOpen(true)
+    componentDidMount()         //устанавливаем событие при нажатии клавиши Esc
   }
   const handleImagePopupOpen = () => { 
     setisImagePopupOpen(true)
   }
 
+  //открываем попап с картинкой
   const [selectedCard, setSelectedCard] = useState({}); 
   const handleCardClick = (card) => {
-    setSelectedCard(card)
-    setisImagePopupOpen(true)
+    setSelectedCard(card)       //передаем  данные карточки
+    setisImagePopupOpen(true)   //открываем попап скартинкой
+    componentDidMount()         //устанавливаем событие при нажатии клавиши Esc
     // document.querySelector('.open-img__popup').classList.add('popup_opened');
   };
 
+   //закрываем попап с картинкой
   const closeAllPopups = () => {
     // console.log('closeAllPopups');
     setisAddPlacePopupOpen(false);
@@ -44,7 +51,21 @@ function App() {
     setisEditProfilePopupOpen(false);
     setisConfirmPopupOpen(false);
     setisImagePopupOpen(false);
+    componentWillUnmount()  //снимаем событие при нажатии клавиши Esc
   };
+
+  const onKeyDown = (evt) => {
+    if (evt.key == "Escape") {
+      // console.log('onKeyDown');
+      closeAllPopups()
+    }
+  }
+  const componentDidMount = () => {
+    document.addEventListener('keydown', onKeyDown);
+  }
+ const componentWillUnmount = () => {
+    document.removeEventListener('keydown', onKeyDown);
+  }
 
 
   return (
@@ -65,7 +86,8 @@ function App() {
   <ImagePopup onClose={closeAllPopups} 
               isOpen={isImagePopupOpen} 
               name={selectedCard.name} 
-              link={selectedCard.link}/>
+              link={selectedCard.link}
+              />
 
 {/* попап Редактировать профиль */}
       <PopupWithForm  onClose={closeAllPopups} 

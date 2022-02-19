@@ -1,12 +1,12 @@
 import React from 'react';
 
 function ImagePopup(props) {
-
     return (
-
-        <div className="open-img">
+        <div    className="open-img">
             <div className={`popup open-img__popup  ${props.isOpen && "popup_opened"}`}>
-                <div className="popup__overlay"></div>
+                <div className="popup__overlay"
+                     onClick={props.onClose}
+                ></div>
                 <div className="popup__container">
                     <div className="popup__body">
                         <button className="popup__close popup__close-img"
@@ -25,7 +25,6 @@ function ImagePopup(props) {
                 </div>
             </div>
         </div>
-
     );
 }
 
