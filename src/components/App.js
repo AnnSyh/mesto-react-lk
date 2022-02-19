@@ -49,20 +49,6 @@ function App() {
   };
 
 
-  const [cards , setCards ] = useState([]);
-
-  useEffect(() => {
-
-    api.getInitialCards()
-      .then((cards) => {
-          // console.log('cards = ',cards)
-          setCards(cards);
-      })
-      .catch((err) => console.log(err));
-
-  }, []);
-
-
   return (
     <>
       <Header />
@@ -72,35 +58,21 @@ function App() {
                   handleAddPlaceClick={handleAddPlaceClick}
                   handleConfirmClick={handleConfirmClick}
                   handleImagePopupOpen={handleImagePopupOpen}
+                  handleCardClick={handleCardClick}
         />
-
-        <section className="cards section content__section ">
-          <div className="list-template-inner">
-          <ul className="cards__list list-template-place">
-              {cards.map(({ id, ...card }) => {
-                  return (
-                    <Card   key={card._id} 
-                            handleCardClick={() => handleCardClick(card)} 
-                            {...card} 
-                    />
-                        );
-              })}
-          </ul>
-          </div>
-        </section>
       </main>
 
       <Footer />
-
-      {setSelectedCard ? <ImagePopup onClose={closeAllPopups} 
-                                   isOpen={isImagePopupOpen} 
-                                   name={selectedCard.name} 
-                                   link={selectedCard.link}/> : null}
+{/* /попап для картинки карточки */}
+  <ImagePopup onClose={closeAllPopups} 
+              isOpen={isImagePopupOpen} 
+              name={selectedCard.name} 
+              link={selectedCard.link}/>
 
 {/* попап Редактировать профиль */}
       <PopupWithForm  onClose={closeAllPopups} 
                       isOpen={isEditProfilePopupOpen}  
-                      title={'Редактировать профиль'} 
+                      title="Редактировать профиль" 
                       name={'edit-profile'} 
       >
         <div className="form__field">
