@@ -78,9 +78,9 @@ const [cards , setCards ] = useState([]);
         <section className="cards section content__section ">
             <div className="list-template-inner">
                 <ul className="cards__list list-template-place">
-                    {cards.map(({ id, ...card }) => {
+                    {cards.map(({ _id, ...card }) => {
                         return (
-                        <Card   key={card._id} 
+                        <Card   key={_id} 
                                 handleCardClick={() => handleCardClick(card)} 
                                 {...card} 
                         />
