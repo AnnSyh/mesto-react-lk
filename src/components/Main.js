@@ -16,25 +16,7 @@ function Main({
  // Подписываемся на контекст CurrentUserContext
  const currentUser = React.useContext(CurrentUserContext);
 
-
-const [userName, setUserName] = useState('Имя пользователя');
-const [userDescription, setUserDescription] = useState('О пользователе');
-const [userAvatar, setUserAvatar] = useState(avatar);
-  
-    useEffect(() => {
-
-      api.getUser()
-        .then((userData) => {
-            // console.log('userData = ',userData)
-            setUserName(userData.name);
-            setUserDescription(userData.about);
-            setUserAvatar(userData.avatar);
-        })
-        .catch((err) => console.log(err));
-
-    }, []);
-
-const [cards , setCards ] = useState([]);
+ const [cards , setCards ] = useState([]);
 
     useEffect(() => {
   
@@ -54,8 +36,11 @@ const [cards , setCards ] = useState([]);
         <section className="profile section content__section">
             <div className="profile__user">
                 <div className="profile__pic btn-avatar-edit">
-                    <img className="profile__img"
+                    {/* <img className="profile__img"
                         src={userAvatar}
+                        alt="аватар" /> */}
+                    <img className="profile__img"
+                        src={`${currentUser.avatar}`}
                         alt="аватар" />
                     <Button title="" 
                             btnClass="profile__btn profile__btn_user-edit profile__btn_avatar-edit  link-hover" 
@@ -64,15 +49,13 @@ const [cards , setCards ] = useState([]);
 
                 <div className="profile__info">
                     <div className="profile__edit">
-                        <h1 className="profile__name text-overflow">{userName}</h1>
-
-                        <h1> ----  {`${currentUser.name}`} -----</h1>
+                        <h1 className="profile__name text-overflow">{`${currentUser.name}`}</h1>
 
                         <Button title="" 
                                 btnClass="profile__btn profile__btn_user-edit btn-user-edit link-hover" 
                                 handleClick={handleEditProfileClick}/>
                     </div>
-                    <p className="profile__job text-overflow">{userDescription}</p>
+                    <p className="profile__job text-overflow">{`${currentUser.about}`}</p>
                 </div>
 
             </div>
