@@ -4,6 +4,7 @@ import avatar from '../images/avatar.jpg';
 import Button from './button';
 import api from  '../utils/api.js';
 import Card from './Card';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Main({
                 handleEditAvatarClick, 
@@ -11,6 +12,10 @@ function Main({
                 handleAddPlaceClick,
                 handleCardClick
             }) {
+
+ // Подписываемся на контекст CurrentUserContext
+ const currentUser = React.useContext(CurrentUserContext);
+
 
 const [userName, setUserName] = useState('Имя пользователя');
 const [userDescription, setUserDescription] = useState('О пользователе');
@@ -60,6 +65,8 @@ const [cards , setCards ] = useState([]);
                 <div className="profile__info">
                     <div className="profile__edit">
                         <h1 className="profile__name text-overflow">{userName}</h1>
+
+                        <h1> ----  {`${currentUser.name}`} -----</h1>
 
                         <Button title="" 
                                 btnClass="profile__btn profile__btn_user-edit btn-user-edit link-hover" 

@@ -23,6 +23,14 @@ class Api {
       .then(handleError);
   }
 
+  getUserInfo() {
+    return fetch(`${this._url}/users/me`, {
+      headers: this._headers,
+      // body: JSON.stringify()
+    })
+      .then(handleError);
+  }
+
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, { headers: this._headers })
