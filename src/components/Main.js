@@ -36,9 +36,6 @@ function Main({
         <section className="profile section content__section">
             <div className="profile__user">
                 <div className="profile__pic btn-avatar-edit">
-                    {/* <img className="profile__img"
-                        src={userAvatar}
-                        alt="аватар" /> */}
                     <img className="profile__img"
                         src={`${currentUser.avatar}`}
                         alt="аватар" />
