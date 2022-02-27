@@ -13,21 +13,11 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
-
     api.getUser()
       .then((userData) => {
-
-        console.log('userData = ', userData)
-
         setCurrentUser(userData);
-
-        console.log('setCurrentUser = ', setCurrentUser)
-        console.log('userData.name = ', userData.name)
-
-
       })
       .catch((err) => console.log(err));
-
   }, []);
 
 

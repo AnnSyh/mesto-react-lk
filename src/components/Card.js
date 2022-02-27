@@ -12,7 +12,6 @@ function Card(props) {
  
  // Определяем, являемся ли мы владельцем текущей карточки
 const isOwn = props.owner._id === currentUser._id;
-console.log('isOwn = ',isOwn);
 
 // Создаём переменную, которую после зададим в `className` для кнопки удаления
 const cardDeleteButtonClassName = (
@@ -24,8 +23,6 @@ const isLiked = props.likes.some(i => i._id === currentUser._id);
 
 // Создаём переменную, которую после зададим в `className` для кнопки лайка
 const cardLikeButtonClassName = `cards__heart ${isLiked ? 'cards__heart_active' : ''}`;  
-console.log('cardLikeButtonClassName = ',cardLikeButtonClassName); 
-
 
     return (
         <li className="cards__item">

@@ -2,82 +2,82 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import avatar from '../images/avatar.jpg';
 import Button from './button';
-import api from  '../utils/api.js';
+import api from '../utils/api.js';
 import Card from './Card';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Main({
-                handleEditAvatarClick, 
-                handleEditProfileClick, 
-                handleAddPlaceClick,
-                handleCardClick
-            }) {
+    handleEditAvatarClick,
+    handleEditProfileClick,
+    handleAddPlaceClick,
+    handleCardClick
+}) {
 
- // Подписываемся на контекст CurrentUserContext
- const currentUser = React.useContext(CurrentUserContext);
+    // Подписываемся на контекст CurrentUserContext
+    const currentUser = React.useContext(CurrentUserContext);
 
- const [cards , setCards ] = useState([]);
+    const [cards, setCards] = useState([]);
 
     useEffect(() => {
-  
-      api.getInitialCards()
-        .then((cards) => {
-            // console.log('cards = ',cards)
-            setCards(cards);
-        })
-        .catch((err) => console.log(err));
-  
-    }, []);    
+
+        api.getInitialCards()
+            .then((cards) => {
+                // console.log('cards = ',cards)
+                setCards(cards);
+            })
+            .catch((err) => console.log(err));
+
+    }, []);
 
 
 
-  return (
-    <>
-        <section className="profile section content__section">
-            <div className="profile__user">
-                <div className="profile__pic btn-avatar-edit">
-                    <img className="profile__img"
-                        src={`${currentUser.avatar}`}
-                        alt="аватар" />
-                    <Button title="" 
-                            btnClass="profile__btn profile__btn_user-edit profile__btn_avatar-edit  link-hover" 
-                            handleClick={handleEditAvatarClick}/>
-                </div>
-
-                <div className="profile__info">
-                    <div className="profile__edit">
-                        <h1 className="profile__name text-overflow">{`${currentUser.name}`}</h1>
-
-                        <Button title="" 
-                                btnClass="profile__btn profile__btn_user-edit btn-user-edit link-hover" 
-                                handleClick={handleEditProfileClick}/>
+    return (
+        <>
+            <section className="profile section content__section">
+                <div className="profile__user">
+                    <div className="profile__pic btn-avatar-edit">
+                        <img className="profile__img"
+                            src={`${currentUser.avatar}`}
+                            alt="аватар" />
+                        <Button title=""
+                            btnClass="profile__btn profile__btn_user-edit profile__btn_avatar-edit  link-hover"
+                            handleClick={handleEditAvatarClick} />
                     </div>
-                    <p className="profile__job text-overflow">{`${currentUser.about}`}</p>
+
+                    <div className="profile__info">
+                        <div className="profile__edit">
+                            <h1 className="profile__name text-overflow">{`${currentUser.name}`}</h1>
+
+                            <Button title=""
+                                btnClass="profile__btn profile__btn_user-edit btn-user-edit link-hover"
+                                handleClick={handleEditProfileClick} />
+                        </div>
+                        <p className="profile__job text-overflow">{`${currentUser.about}`}</p>
+                    </div>
+
                 </div>
 
-            </div>
+                <Button title="+"
+                    btnClass="profile__btn profile__btn_user-add link-hover"
+                    handleClick={handleAddPlaceClick} />
+            </section>
 
-            <Button title="+" 
-                    btnClass="profile__btn profile__btn_user-add link-hover" 
-                    handleClick={handleAddPlaceClick}/>
-        </section>
-
-        <section className="cards section content__section ">
-            <div className="list-template-inner">
-                <ul className="cards__list list-template-place">
-                    {cards.map(({ _id, ...card }) => {
-                        return (
-                        <Card   key={_id} 
-                                handleCardClick={() => handleCardClick(card)} 
-                                {...card} 
-                        />
+            <section className="cards section content__section ">
+                <div className="list-template-inner">
+                    <ul className="cards__list list-template-place">
+                        {cards.map(({ _id, ...card }) => {
+                            return (
+                                <Card key={_id}
+                                    handleCardClick={() => handleCardClick(card)}
+                                    {...card}
+                                />
                             );
-                    })}
-                </ul>
-            </div>
-        </section>
-    </>
-  );
+                        })}
+                    </ul>
+                </div>
+            </section>
+        </>
+    );
 }
 
 export default Main;
