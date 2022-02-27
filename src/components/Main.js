@@ -11,7 +11,8 @@ function Main({
     handleEditProfileClick,
     handleAddPlaceClick,
     handleCardClick,
-    handleCardLike
+    handleCardLike,
+    handleCardDelete
 }) {
 
     // Подписываемся на контекст CurrentUserContext
@@ -31,16 +32,22 @@ function Main({
     }, []);
 
     function handleCardLike(card) {
-        console.log('handleCardLike');
-        console.log('card = ', card);
-        console.log('card._id = ', card._id);
         // Снова проверяем, есть ли уже лайк на этой карточке
         const isLiked = card.likes.some(i => i._id === currentUser._id);
-debugger
         // Отправляем запрос в API и получаем обновлённые данные карточки
         api.changeLike(card._id, !isLiked)
             .then((newCard) => {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+            });
+    }
+
+    function handleCardDelete(card) {
+        console.log('handleDeleteClick');
+
+        // Отправляем запрос в API и удаляем карточку 
+        api.deleteCard(card._id)
+            .then((newCard) => {
+                setCards( (state) => state.filter((c) => c._id !== card._id));
             });
     }
 
@@ -85,6 +92,7 @@ debugger
                                 <Card key={card._id}
                                     handleCardClick={() => handleCardClick(card)}
                                     handleCardLike={() => handleCardLike(card)}
+                                    handleCardDelete={() => handleCardDelete(card)}
                                     {...card}
                                 />
                             );

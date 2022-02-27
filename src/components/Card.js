@@ -3,13 +3,14 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Card(props) {
 
-    // console.log('props = ', props);
-
     function handleCardClick() {
         props.handleCardClick();
     }
     function handleCardLike() {
         props.handleCardLike();
+    }
+    function handleCardDelete() {
+        props.handleCardDelete();
     }
 
     // Подписываемся на контекст CurrentUserContext
@@ -39,6 +40,7 @@ function Card(props) {
                 <button
                     // className="cards__trash hidden" 
                     className={cardDeleteButtonClassName}
+                    onClick={handleCardDelete}
                 ></button>
             </div>
             <div className="cards__text">
