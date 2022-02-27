@@ -91,6 +91,17 @@ class Api {
     })
       .then(handleError);
   }
+  changeLike(id, like){
+    if(!id) {
+      console.error("Api.changeLike не передан обязательный аргумент cardId. Запрос не пройдет.");
+      return;
+    }
+    return fetch(`${this._url}/cards/${id}/likes`, {
+      method: (like ? 'PUT' : 'DELETE'),
+      headers: this._headers
+    })
+      .then(handleError);
+  }
 
 }
 
