@@ -8,6 +8,8 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/api.js';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
+import EditProfilePopup from './EditProfilePopup';
+
 function App() {
 
   const [currentUser, setCurrentUser] = useState({});
@@ -82,6 +84,18 @@ function App() {
   }
 
 
+// Функция обновления пользователя 
+  function handleUpdateUser(user) {
+    api.postUser(user)
+      .then((userData) => {
+        setCurrentUser(userData);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err));
+  }
+
+
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -106,20 +120,12 @@ function App() {
         />
 
         {/* попап Редактировать профиль */}
-        <PopupWithForm onClose={closeAllPopups}
-          isOpen={isEditProfilePopupOpen}
-          title="Редактировать профиль"
-          name={'edit-profile'}
-        >
-          <div className="form__field">
-            <input placeholder="Имя" id="user-title" className="popup__input popup__input_user-title" name="title" required="" minLength="2" maxLength="40" />
-            <span className="popup__input-error user-title-error"></span>
-          </div>
-          <div className="form__field">
-            <input placeholder="О себе" id="user-subtitle" className="popup__input popup__input_user-subtitle" name="subtitle" required="" minLength="2" maxLength="200" />
-            <span className="popup__input-error user-subtitle-error"></span>
-          </div>
-        </PopupWithForm>
+        <EditProfilePopup 
+          isOpen={isEditProfilePopupOpen} 
+          onClose={closeAllPopups} 
+          onUpdateUser={handleUpdateUser}
+        /> 
+
 
         {/* попап добавления карточки       */}
         <PopupWithForm onClose={closeAllPopups}
