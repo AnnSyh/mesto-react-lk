@@ -13,6 +13,8 @@ import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
 
+  const [currentBtn, setCurrentBtn] = useState({});
+
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
@@ -101,7 +103,7 @@ console.log('avatar= ',avatar);
 
     api.postAvatar(avatar)
     .then((data) => {
-      setCurrentUser(avatar);
+      setCurrentUser(data);
       closeAllPopups();
     })
     .catch((err) => console.log(err));
