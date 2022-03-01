@@ -52,7 +52,7 @@ class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatar['avatar-src']
+        avatar: avatar
       })
     })
       .then(handleError);

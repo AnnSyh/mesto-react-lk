@@ -9,6 +9,7 @@ import api from '../utils/api.js';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
 
@@ -93,13 +94,22 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
+// Функция обновления аватара 
+  function handleUpdateAvatar(avatar) {
 
+console.log('avatar= ',avatar);
 
+    api.postAvatar(avatar)
+    .then((data) => {
+      setCurrentUser(avatar);
+      closeAllPopups();
+    })
+    .catch((err) => console.log(err));
+  }
 
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-
         <Header />
         <main className="content">
           <Main handleEditAvatarClick={handleEditAvatarClick}
@@ -110,7 +120,6 @@ function App() {
             handleCardClick={handleCardClick}
           />
         </main>
-
         <Footer />
         {/* /попап для картинки карточки */}
         <ImagePopup onClose={closeAllPopups}
@@ -118,17 +127,15 @@ function App() {
           name={selectedCard.name}
           link={selectedCard.link}
         />
-
         {/* попап Редактировать профиль */}
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen} 
           onClose={closeAllPopups} 
           onUpdateUser={handleUpdateUser}
         /> 
-
-
         {/* попап добавления карточки       */}
-        <PopupWithForm onClose={closeAllPopups}
+        <PopupWithForm 
+          onClose={closeAllPopups}
           isOpen={isAddPlacePopupOpen}
           title={'Новое место'}
           name={'add-plaсe'}
@@ -142,18 +149,29 @@ function App() {
             <span className="popup__input-error plaсe-img-input-error"></span>
           </div>
         </PopupWithForm>
-
         {/* попап Обновить аватар       */}
-        <PopupWithForm onClose={closeAllPopups}
+        <EditAvatarPopup 
+          isOpen={isEditAvatarPopupOpen} 
+          onClose={closeAllPopups} 
+          onUpdateAvatar={handleUpdateAvatar}
+        />
+        {/* <PopupWithForm onClose={closeAllPopups}
           isOpen={isEditAvatarPopupOpen}
           title={'Обновить аватар'}
           name={'new-avatar'}
         >
           <div className="form__field">
-            <input placeholder="ссылка на изображение аватара" id="avatar-input" className="popup__input popup__input_avatar-img" name="avatar-src" required="" type="url" />
+            <input 
+              placeholder="ссылка на изображение аватара" 
+              id="avatar-input" 
+              className="popup__input popup__input_avatar-img" 
+              name="avatar-src" 
+              required="" 
+              type="url" 
+            />
             <span className="popup__input-error plaсe-img-input-error"></span>
           </div>
-        </PopupWithForm>
+        </PopupWithForm> */}
 
         {/* попап с удалением карточки */}
         <PopupWithForm onClose={closeAllPopups}
