@@ -10,6 +10,7 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
 
@@ -176,7 +177,12 @@ console.log('avatar= ',avatar);
           onUpdateUser={handleUpdateUser}
         /> 
         {/* попап добавления карточки       */}
-        <PopupWithForm 
+        <AddPlacePopup
+          isOpen={isEditAvatarPopupOpen} 
+          onClose={closeAllPopups} 
+          onAddPlace={handleAddPlaceClick}
+        />
+        {/* <PopupWithForm 
           onClose={closeAllPopups}
           isOpen={isAddPlacePopupOpen}
           title={'Новое место'}
@@ -190,30 +196,13 @@ console.log('avatar= ',avatar);
             <input placeholder="ссылка на картинку" id="plaсe-img-input" className="popup__input popup__input_plaсe-img" name="link" required="" type="url" />
             <span className="popup__input-error plaсe-img-input-error"></span>
           </div>
-        </PopupWithForm>
+        </PopupWithForm> */}
         {/* попап Обновить аватар       */}
         <EditAvatarPopup 
           isOpen={isEditAvatarPopupOpen} 
           onClose={closeAllPopups} 
           onUpdateAvatar={handleUpdateAvatar}
         />
-        {/* <PopupWithForm onClose={closeAllPopups}
-          isOpen={isEditAvatarPopupOpen}
-          title={'Обновить аватар'}
-          name={'new-avatar'}
-        >
-          <div className="form__field">
-            <input 
-              placeholder="ссылка на изображение аватара" 
-              id="avatar-input" 
-              className="popup__input popup__input_avatar-img" 
-              name="avatar-src" 
-              required="" 
-              type="url" 
-            />
-            <span className="popup__input-error plaсe-img-input-error"></span>
-          </div>
-        </PopupWithForm> */}
 
         {/* попап с удалением карточки */}
         <PopupWithForm onClose={closeAllPopups}
