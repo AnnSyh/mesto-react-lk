@@ -13,7 +13,42 @@ import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
 
-  const [currentBtn, setCurrentBtn] = useState({});
+  // --------------------------
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+
+      api.getInitialCards()
+          .then((cards) => {
+              // console.log('cards = ',cards)
+              setCards(cards);
+          })
+          .catch((err) => console.log(err));
+
+  }, []);
+
+  function handleCardLike(card) {
+      // Снова проверяем, есть ли уже лайк на этой карточке
+      const isLiked = card.likes.some(i => i._id === currentUser._id);
+      // Отправляем запрос в API и получаем обновлённые данные карточки
+      api.changeLike(card._id, !isLiked)
+          .then((newCard) => {
+              setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+          });
+  }
+
+  function handleCardDelete(card) {
+      console.log('handleDeleteClick');
+
+      // Отправляем запрос в API и удаляем карточку 
+      api.deleteCard(card._id)
+          .then((newCard) => {
+              setCards( (state) => state.filter((c) => c._id !== card._id));
+          });
+  }
+
+  // --------------------------
+
 
   const [currentUser, setCurrentUser] = useState({});
 
@@ -114,12 +149,17 @@ console.log('avatar= ',avatar);
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
         <main className="content">
-          <Main handleEditAvatarClick={handleEditAvatarClick}
+          <Main 
+            handleEditAvatarClick={handleEditAvatarClick}
             handleEditProfileClick={handleEditProfileClick}
             handleAddPlaceClick={handleAddPlaceClick}
             handleConfirmClick={handleConfirmClick}
             handleImagePopupOpen={handleImagePopupOpen}
             handleCardClick={handleCardClick}
+
+            cards={cards}
+            handleCardLike={handleCardLike}
+            handleCardDelete={handleCardDelete}
           />
         </main>
         <Footer />

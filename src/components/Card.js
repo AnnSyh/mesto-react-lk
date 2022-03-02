@@ -30,13 +30,13 @@ function Card(props) {
 
     return (
         <li className="cards__item">
-            <div className="cards__pic"
-                onClick={handleCardClick}
-            >
+            <div className="cards__pic">
                 <img className="cards__img"
                     data-popup="open-img__popup"
                     src={props.link}
-                    alt={props.name} />
+                    alt={props.name} 
+                    onClick={handleCardClick}
+                />
                 <button
                     // className="cards__trash hidden" 
                     className={cardDeleteButtonClassName}
