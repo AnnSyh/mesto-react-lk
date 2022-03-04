@@ -3,13 +3,12 @@ import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
 
+  console.log('AddPlacePopup.js: props = ',props);
+
   const nameRef = React.useRef();
   const linkRef = React.useRef();
 
   React.useEffect(() => {
-// debugger
-console.log('nameRef = ',nameRef);
-
     nameRef.current = '';
     linkRef.current='';
   }, [props.isOpen]);
@@ -17,18 +16,18 @@ console.log('nameRef = ',nameRef);
 
   function handleSubmit(e) {
       e.preventDefault(e);
-      console.log('nameRef.current.value = ', nameRef.current);
-      props.handleAddPlaceClick(nameRef.current.value, linkRef.current);
+      console.log('nameRef.current = ', nameRef.current);
+      props.handleAddPlaceClick(nameRef.current, linkRef.current);
       props.onClose();
     }
 
   return (
     <PopupWithForm
-      onClose={props.closeAllPopups}
-      isOpen={props.isAddPlacePopupOpen}
-      title={'Новое место'}
-      name={'add-plaсe'}
-      buttonName={"Создать"}
+      title='Новое место'
+      name='add-plaсe'
+      buttonName="Создать"
+      isOpen={props.isOpen}
+      onClose={props.onClose}
       onSubmit={handleSubmit}
     >
       <div className="form__field">

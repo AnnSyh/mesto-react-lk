@@ -48,6 +48,16 @@ function App() {
           });
   }
 
+  function handleAddPlaceSubmit(card) {
+      console.log('handleAddPlaceSubmit');
+
+      // Отправляем запрос в API и добавляем карточку 
+      // api.postCreateCard(card._id)
+      //     .then((newCard) => {
+      //         setCards( (state) => state.filter((c) => c._id !== card._id));
+      //     });
+  }
+
   // --------------------------
 
 
@@ -178,8 +188,8 @@ console.log('avatar= ',avatar);
         /> 
         {/* попап добавления карточки       */}
         <AddPlacePopup
-          isOpen={isEditAvatarPopupOpen} 
-          onClose={closeAllPopups} 
+          onClose={closeAllPopups}
+          isOpen={isAddPlacePopupOpen}
           onAddPlace={handleAddPlaceClick}
         />
         {/* <PopupWithForm 
