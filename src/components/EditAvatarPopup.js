@@ -3,11 +3,13 @@ import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup(props) {
 
+  console.log('EditAvatarPopup.js: props = ',props);
+
   const inputRef = React.useRef();
 
   function handleSubmit(evt) {
     evt.preventDefault(evt);
-    console.log('inputRef.current.value = ', inputRef.current.value);
+    console.log('EditAvatarPopup.js: inputRef.current.value = ', inputRef.current.value);
     props.onUpdateAvatar(inputRef.current.value);
   };
 

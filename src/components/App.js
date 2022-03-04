@@ -19,12 +19,13 @@ function App() {
 
   useEffect(() => {
 
-      api.getInitialCards()
-          .then((cards) => {
-              // console.log('cards = ',cards)
-              setCards(cards);
-          })
-          .catch((err) => console.log(err));
+      api
+        .getInitialCards()
+        .then((cards) => {
+            // console.log('cards = ',cards)
+            setCards(cards);
+        })
+        .catch((err) => console.log(err));
 
   }, []);
 
@@ -32,30 +33,35 @@ function App() {
       // Снова проверяем, есть ли уже лайк на этой карточке
       const isLiked = card.likes.some(i => i._id === currentUser._id);
       // Отправляем запрос в API и получаем обновлённые данные карточки
-      api.changeLike(card._id, !isLiked)
-          .then((newCard) => {
-              setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-          });
+      api
+        .changeLike(card._id, !isLiked)
+        .then((newCard) => {
+            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        });
   }
 
   function handleCardDelete(card) {
       console.log('handleDeleteClick');
 
       // Отправляем запрос в API и удаляем карточку 
-      api.deleteCard(card._id)
-          .then((newCard) => {
-              setCards( (state) => state.filter((c) => c._id !== card._id));
-          });
+      api
+        .deleteCard(card._id)
+        .then((newCard) => {
+            setCards( (state) => state.filter((c) => c._id !== card._id));
+        });
   }
 
-  function handleAddPlaceSubmit(card) {
+  function handleAddPlaceSubmit(name,link) {
       console.log('handleAddPlaceSubmit');
+      console.log('handleAddPlaceSubmit card = ',name);
+      console.log('handleAddPlaceSubmit link = ',link);
 
       // Отправляем запрос в API и добавляем карточку 
-      // api.postCreateCard(card._id)
-      //     .then((newCard) => {
-      //         setCards( (state) => state.filter((c) => c._id !== card._id));
-      //     });
+      api
+        .postCreateCard({name,link})
+        .then((newCard) => {
+          setCards([newCard, ...cards]); 
+        });
   }
 
   // --------------------------
@@ -190,7 +196,7 @@ console.log('avatar= ',avatar);
         <AddPlacePopup
           onClose={closeAllPopups}
           isOpen={isAddPlacePopupOpen}
-          onAddPlace={handleAddPlaceClick}
+          onAddPlace={handleAddPlaceSubmit}
         />
         {/* <PopupWithForm 
           onClose={closeAllPopups}

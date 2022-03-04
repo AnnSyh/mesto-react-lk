@@ -63,7 +63,10 @@ class Api {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify(card)
+      body: JSON.stringify({
+        name: card.name,
+        link: card.link
+      })
     })
       .then(handleError);
   }

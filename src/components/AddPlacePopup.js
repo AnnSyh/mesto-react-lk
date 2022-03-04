@@ -8,18 +8,26 @@ function AddPlacePopup(props) {
   const nameRef = React.useRef();
   const linkRef = React.useRef();
 
+  function handleSubmit(evt) {
+    evt.preventDefault(evt);
+
+    console.log('AddPlacePopup.js:  nameRef = ', nameRef);
+    console.log('AddPlacePopup.js:  nameRef.current = ', nameRef.current);
+    console.log('AddPlacePopup.js:  nameRef.current.value = ', nameRef.current.value);
+
+    props.onAddPlace(nameRef.current, linkRef.current);
+    props.onClose();
+  }
+
+
   React.useEffect(() => {
+    // nameRef.current = 'qqqq';
+    // linkRef.current='https://hair-fresh.ru/wp-content/uploads/2017/06/2eceb00375e2db39b304f975eb5499b8.jpg';
     nameRef.current = '';
     linkRef.current='';
   }, [props.isOpen]);
 
 
-  function handleSubmit(e) {
-      e.preventDefault(e);
-      console.log('nameRef.current = ', nameRef.current);
-      props.handleAddPlaceClick(nameRef.current, linkRef.current);
-      props.onClose();
-    }
 
   return (
     <PopupWithForm
