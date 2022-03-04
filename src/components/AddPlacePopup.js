@@ -13,8 +13,6 @@ const linkRef = React.useRef();
   function handleSubmit(evt) {
     evt.preventDefault(evt);
 
-    console.log('nameRef.current.value = ', nameRef.current.value);
-    console.log('linkRef.current.value = ', linkRef.current.value);
     setnameValue(nameRef.current.value);
     setlinkValue(linkRef.current.value);
 
