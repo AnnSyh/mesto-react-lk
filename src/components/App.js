@@ -70,7 +70,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
-    api.getUser()
+    api
+      .getUser()
       .then((userData) => {
         setCurrentUser(userData);
       })
@@ -141,7 +142,8 @@ function App() {
 
 // Функция обновления пользователя 
   function handleUpdateUser(user) {
-    api.postUser(user)
+    api
+      .postUser(user)
       .then((userData) => {
         setCurrentUser(userData);
         closeAllPopups();
@@ -153,11 +155,12 @@ function App() {
 
 console.log('avatar= ',avatar);
 
-    api.postAvatar(avatar)
-    .then((data) => {
-      setCurrentUser(data);
-      closeAllPopups();
-    })
+    api
+      .postAvatar(avatar)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
     .catch((err) => console.log(err));
   }
 
@@ -198,21 +201,6 @@ console.log('avatar= ',avatar);
           isOpen={isAddPlacePopupOpen}
           onAddPlace={handleAddPlaceSubmit}
         />
-        {/* <PopupWithForm 
-          onClose={closeAllPopups}
-          isOpen={isAddPlacePopupOpen}
-          title={'Новое место'}
-          name={'add-plaсe'}
-        >
-          <div className="form__field">
-            <input placeholder="название" id="place-title-input" className="popup__input popup__input_plaсe-title" name="name" required="" minLength="2" maxLength="30" />
-            <span className="popup__input-error place-title-input-error"></span>
-          </div>
-          <div className="form__field">
-            <input placeholder="ссылка на картинку" id="plaсe-img-input" className="popup__input popup__input_plaсe-img" name="link" required="" type="url" />
-            <span className="popup__input-error plaсe-img-input-error"></span>
-          </div>
-        </PopupWithForm> */}
         {/* попап Обновить аватар       */}
         <EditAvatarPopup 
           isOpen={isEditAvatarPopupOpen} 

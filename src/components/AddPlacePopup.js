@@ -2,31 +2,25 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
+const [nameValue, setnameValue] = React.useState("");
+const nameRef = React.useRef();
 
-  console.log('AddPlacePopup.js: props = ',props);
+const [linkValue, setlinkValue] = React.useState("");
+const linkRef = React.useRef();
 
-  const nameRef = React.useRef();
-  const linkRef = React.useRef();
+  
 
   function handleSubmit(evt) {
     evt.preventDefault(evt);
 
-    console.log('AddPlacePopup.js:  nameRef = ', nameRef);
-    console.log('AddPlacePopup.js:  nameRef.current = ', nameRef.current);
-    console.log('AddPlacePopup.js:  nameRef.current.value = ', nameRef.current.value);
+    console.log('nameRef.current.value = ', nameRef.current.value);
+    console.log('linkRef.current.value = ', linkRef.current.value);
+    setnameValue(nameRef.current.value);
+    setlinkValue(linkRef.current.value);
 
-    props.onAddPlace(nameRef.current, linkRef.current);
+    props.onAddPlace(nameRef.current.value, linkRef.current.value);
     props.onClose();
   }
-
-
-  React.useEffect(() => {
-    // nameRef.current = 'qqqq';
-    // linkRef.current='https://hair-fresh.ru/wp-content/uploads/2017/06/2eceb00375e2db39b304f975eb5499b8.jpg';
-    nameRef.current = '';
-    linkRef.current='';
-  }, [props.isOpen]);
-
 
 
   return (
@@ -44,9 +38,10 @@ function AddPlacePopup(props) {
             id="place-title-input" 
             className="popup__input popup__input_plaсe-title" 
             name="name" 
-            required="" 
+            required 
             minLength="2" 
             maxLength="30" 
+            ref={nameRef} 
         />
         <span className="popup__input-error place-title-input-error"></span>
       </div>
@@ -56,8 +51,9 @@ function AddPlacePopup(props) {
           id="plaсe-img-input" 
           className="popup__input popup__input_plaсe-img" 
           name="link" 
-          required="" 
+          required 
           type="url" 
+          ref={linkRef}
         />
         <span className="popup__input-error plaсe-img-input-error"></span>
       </div>
