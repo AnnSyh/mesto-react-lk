@@ -2,19 +2,12 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
-const [nameValue, setnameValue] = React.useState("");
+
 const nameRef = React.useRef();
-
-const [linkValue, setlinkValue] = React.useState("");
 const linkRef = React.useRef();
-
   
-
   function handleSubmit(evt) {
     evt.preventDefault(evt);
-
-    setnameValue(nameRef.current.value);
-    setlinkValue(linkRef.current.value);
 
     props.onAddPlace(nameRef.current.value, linkRef.current.value);
     props.onClose();
