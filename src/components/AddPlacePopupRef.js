@@ -1,36 +1,17 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
 
-  const [nameCard, setNameCard] = useState('');
-  const [linkCard, setLinkCard] = useState('');
-
-  function handleСhangeCardName(e) {
-    setNameCard(e.target.value)
-  }
-
-  function handleСhangeCardLink(e) {
-    setLinkCard(e.target.value)
-  }
+const nameRef = React.useRef();
+const linkRef = React.useRef();
   
   function handleSubmit(evt) {
     evt.preventDefault(evt);
 
-    props.onAddPlace({
-      name: nameCard,
-      link: linkCard
-    });
+    props.onAddPlace(nameRef.current.value, linkRef.current.value);
     props.onClose();
-
   }
-
-   // очищаем поля
-   useEffect(() => {
-    setNameCard("");
-    setLinkCard("");
-  }, [props.isOpen])
 
 
   return (
@@ -52,8 +33,7 @@ function AddPlacePopup(props) {
             required 
             minLength="2" 
             maxLength="30" 
-            value={nameCard}
-            onChange={handleСhangeCardName}
+            ref={nameRef} 
         />
         <span className="popup__input-error place-title-input-error"></span>
       </div>
@@ -65,8 +45,7 @@ function AddPlacePopup(props) {
           name="link" 
           required 
           type="url" 
-          value={linkCard}
-          onChange={handleСhangeCardLink}
+          ref={linkRef}
         />
         <span className="popup__input-error plaсe-img-input-error"></span>
       </div>

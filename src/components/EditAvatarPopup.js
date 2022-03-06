@@ -19,6 +19,7 @@ function EditAvatarPopup(props) {
       name="new-avatar"
       title="Обновить аватар"
       button="profile"
+      buttonText='Сохранить'
       buttonSubmitText={props.buttonSubmitText}
       isOpen={props.isOpen}
       onClose={props.onClose}

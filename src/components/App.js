@@ -42,7 +42,6 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    console.log('handleDeleteClick');
 
     // Отправляем запрос в API и удаляем карточку 
     api
@@ -53,11 +52,13 @@ function App() {
       .catch((err) => console.log(err));
   }
 
-  function handleAddPlaceSubmit(name, link) {
-    console.log('handleAddPlaceSubmit');
-    console.log('handleAddPlaceSubmit card = ', name);
-    console.log('handleAddPlaceSubmit link = ', link);
+  function handleAddPlaceSubmit(card) {
+    // console.log('handleAddPlaceSubmit card = ', card);
+    // console.log('handleAddPlaceSubmit card = ', card.name);
+    // console.log('handleAddPlaceSubmit link = ', card.link);
 
+    const name = card.name;
+    const link = card.link;
     // Отправляем запрос в API и добавляем карточку 
     api
       .postCreateCard({ name, link })
@@ -91,19 +92,15 @@ function App() {
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)
-    componentDidMount()         //устанавливаем событие при нажатии клавиши Esc
   }
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true)
-    componentDidMount()         //устанавливаем событие при нажатии клавиши Esc
   }
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(true)
-    componentDidMount()         //устанавливаем событие при нажатии клавиши Esc
   }
   const handleConfirmClick = () => {
     setIsConfirmPopupOpen(true)
-    componentDidMount()         //устанавливаем событие при нажатии клавиши Esc
   }
   const handleImagePopupOpen = () => {
     setIsImagePopupOpen(true)
@@ -114,8 +111,6 @@ function App() {
   const handleCardClick = (card) => {
     setSelectedCard(card)       //передаем  данные карточки
     setIsImagePopupOpen(true)   //открываем попап скартинкой
-    componentDidMount()         //устанавливаем событие при нажатии клавиши Esc
-    // document.querySelector('.open-img__popup').classList.add('popup_opened');
   };
 
   //закрываем попап с картинкой
@@ -126,21 +121,20 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsConfirmPopupOpen(false);
     setIsImagePopupOpen(false);
-    componentWillUnmount()  //снимаем событие при нажатии клавиши Esc
   };
 
-  const onKeyDown = (evt) => {
-    if (evt.key == "Escape") {
-      // console.log('onKeyDown');
-      closeAllPopups()
+
+  useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopups();
+      }
     }
-  }
-  const componentDidMount = () => {
-    document.addEventListener('keydown', onKeyDown);
-  }
-  const componentWillUnmount = () => {
-    document.removeEventListener('keydown', onKeyDown);
-  }
+
+    document.addEventListener('keydown', closeByEscape)
+    
+    return () => document.removeEventListener('keydown', closeByEscape)
+}, [])
 
 
   // Функция обновления пользователя 
@@ -213,8 +207,9 @@ function App() {
       {/* попап с удалением карточки */}
       <PopupWithForm onClose={closeAllPopups}
         isOpen={isConfirmPopupOpen}
-        title={'Вы уверены?'}
-        name={'confirmation'}
+        title='Вы уверены?'
+        name='confirmation'
+        buttonText='Сохранить'
       >
         <button className="popup__btn confirmation-btn" name="btn" type="submit" value="Согласиться">Да</button>
       </PopupWithForm>

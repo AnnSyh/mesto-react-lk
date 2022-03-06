@@ -37,7 +37,7 @@ function Main(props) {
 
                 </div>
 
-                <Button title="+"
+                <Button title=""
                     btnClass="profile__btn profile__btn_user-add link-hover"
                     handleClick={props.handleAddPlaceClick} />
             </section>
