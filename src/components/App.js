@@ -226,7 +226,6 @@ function App() {
         name='confirmation'
         buttonText='Сохранить'
       >
-        <button className="popup__btn confirmation-btn" name="btn" type="submit" value="Согласиться">Да</button>
       </PopupWithForm>
 
     </CurrentUserContext.Provider>
