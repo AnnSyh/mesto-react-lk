@@ -50,9 +50,6 @@ function App() {
   }
 
   function handleAddPlaceSubmit(card) {
-
-console.log('handleAddPlaceSubmit card = ',card);
-
     const name = card.name;
     const link = card.link;
     setIsSubmitting(true);
@@ -91,9 +88,8 @@ console.log('handleAddPlaceSubmit card = ',card);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
-   // лоадер
+   // ...(на submit)
  const [isSubmitting, setIsSubmitting] = useState(false);
-
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)
@@ -139,26 +135,42 @@ console.log('handleAddPlaceSubmit card = ',card);
     return () => document.removeEventListener('keydown', closeByEscape)
 }, [])
 
-
   // Функция обновления пользователя 
   function handleUpdateUser(user) {
+    setIsSubmitting(true);
+    // buttonText = "Сохраняется...";
     api
       .postUser(user)
       .then((userData) => {
         setCurrentUser(userData);
         closeAllPopups();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(
+        () =>{
+          setIsSubmitting(false);
+          // buttonText = "Сохранить";
+        }
+      );
   }
+
   // Функция обновления аватара 
   function handleUpdateAvatar(avatar) {
+    setIsSubmitting(true);
+    // buttonText = "Сохраняется...";
     api
       .postAvatar(avatar)
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(
+        () =>{
+          setIsSubmitting(false);
+          // buttonText = "Сохранить";
+        }
+      );
   }
 
   return (
@@ -190,6 +202,7 @@ console.log('handleAddPlaceSubmit card = ',card);
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         onUpdateUser={handleUpdateUser}
+        IsSubmit={isSubmitting}
       />
       {/* попап добавления карточки       */}
       <AddPlacePopup
@@ -203,6 +216,7 @@ console.log('handleAddPlaceSubmit card = ',card);
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
         onUpdateAvatar={handleUpdateAvatar}
+        IsSubmit={isSubmitting}
       />
 
       {/* попап с удалением карточки */}

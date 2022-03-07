@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
-
   // console.log('props = ',props);
   // console.log('props.isSubmit = ',props.IsSubmit);
 
