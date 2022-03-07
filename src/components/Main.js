@@ -1,8 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import avatar from '../images/avatar.jpg';
-import Button from './button';
-import api from '../utils/api.js';
+import Button from './Button';
 import Card from './Card';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 

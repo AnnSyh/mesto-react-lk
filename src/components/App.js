@@ -12,17 +12,14 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 
+
 function App() {
-
-  // --------------------------
   const [cards, setCards] = useState([]);
-
+//получаем массив карточек
   useEffect(() => {
-
     api
       .getInitialCards()
       .then((cards) => {
-        // console.log('cards = ',cards)
         setCards(cards);
       })
       .catch((err) => console.log(err));
@@ -42,37 +39,42 @@ function App() {
   }
 
   function handleCardDelete(card) {
-
     // Отправляем запрос в API и удаляем карточку 
     api
       .deleteCard(card._id)
       .then((newCard) => {
         setCards((state) => state.filter((c) => c._id !== card._id));
+        closeAllPopups();
       })
       .catch((err) => console.log(err));
   }
 
   function handleAddPlaceSubmit(card) {
-    // console.log('handleAddPlaceSubmit card = ', card);
-    // console.log('handleAddPlaceSubmit card = ', card.name);
-    // console.log('handleAddPlaceSubmit link = ', card.link);
+
+console.log('handleAddPlaceSubmit card = ',card);
 
     const name = card.name;
     const link = card.link;
+    setIsSubmitting(true);
+    // buttonText = "Сохраняется...";
     // Отправляем запрос в API и добавляем карточку 
     api
       .postCreateCard({ name, link })
       .then((newCard) => {
         setCards([newCard, ...cards]);
+        closeAllPopups();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(
+        () =>{
+          setIsSubmitting(false);
+          // buttonText = "Сохранить";
+        }
+      );
   }
 
-  // --------------------------
-
-
+//  Отправляем запрос в API и устанавливаем текущего юзера
   const [currentUser, setCurrentUser] = useState({});
-
   useEffect(() => {
     api
       .getUser()
@@ -83,12 +85,15 @@ function App() {
   }, []);
 
 
-
+// открытие всплывающих попапов
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
+   // лоадер
+ const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true)
@@ -113,7 +118,7 @@ function App() {
     setIsImagePopupOpen(true)   //открываем попап скартинкой
   };
 
-  //закрываем попап с картинкой
+  //закрываем все попапы
   const closeAllPopups = () => {
     // console.log('closeAllPopups');
     setIsAddPlacePopupOpen(false);
@@ -123,16 +128,14 @@ function App() {
     setIsImagePopupOpen(false);
   };
 
-
+// кнопка Escape
   useEffect(() => {
     const closeByEscape = (e) => {
       if (e.key === 'Escape') {
         closeAllPopups();
       }
     }
-
     document.addEventListener('keydown', closeByEscape)
-    
     return () => document.removeEventListener('keydown', closeByEscape)
 }, [])
 
@@ -149,9 +152,6 @@ function App() {
   }
   // Функция обновления аватара 
   function handleUpdateAvatar(avatar) {
-
-    console.log('avatar= ', avatar);
-
     api
       .postAvatar(avatar)
       .then((data) => {
@@ -196,6 +196,7 @@ function App() {
         onClose={closeAllPopups}
         isOpen={isAddPlacePopupOpen}
         onAddPlace={handleAddPlaceSubmit}
+        IsSubmit={isSubmitting}
       />
       {/* попап Обновить аватар       */}
       <EditAvatarPopup

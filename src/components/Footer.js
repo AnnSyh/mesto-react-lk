@@ -1,11 +1,11 @@
 import React from 'react';
-import arkhyz from '../images/avatar.jpg';
 
 function Footer() {
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer className="footer section page__footer">
-      <p className="footer__copyright">©&nbsp;2021&nbsp;Mesto&nbsp;Russia</p>
+      <p className="footer__copyright">©&nbsp;{currentYear}&nbsp;Mesto&nbsp;Russia</p>
     </footer>
   );
 }

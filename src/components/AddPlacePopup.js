@@ -4,6 +4,9 @@ import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
 
+  // console.log('props = ',props);
+  // console.log('props.isSubmit = ',props.IsSubmit);
+
   const [nameCard, setNameCard] = useState('');
   const [linkCard, setLinkCard] = useState('');
 
@@ -22,7 +25,6 @@ function AddPlacePopup(props) {
       name: nameCard,
       link: linkCard
     });
-    props.onClose();
 
   }
 
@@ -37,8 +39,11 @@ function AddPlacePopup(props) {
     <PopupWithForm
       title='Новое место'
       name='add-plaсe'
-      buttonName="Создать"
-      buttonText='Сохранить'
+      buttonText={
+        props.IsSubmit
+        ? 'Сохранить...'
+        : 'Сохранить'
+      } 
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
