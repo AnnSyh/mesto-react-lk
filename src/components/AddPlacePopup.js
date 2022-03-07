@@ -10,11 +10,11 @@ function AddPlacePopup(props) {
   const [linkCard, setLinkCard] = useState('');
 
   function handleСhangeCardName(e) {
-    setNameCard(e.target.value)
+    setNameCard(e.target.value);
   }
 
   function handleСhangeCardLink(e) {
-    setLinkCard(e.target.value)
+    setLinkCard(e.target.value);
   }
   
   function handleSubmit(evt) {
@@ -32,6 +32,43 @@ function AddPlacePopup(props) {
     setNameCard("");
     setLinkCard("");
   }, [props.isOpen])
+
+// валидация полей формы
+  const[name, setName] = useState('');
+  const[link, setLink] = useState('');
+  const[nameDirty, setNameDirty] = useState('');
+  const[linkDirty, setLinkDirty] = useState('');
+  const[nameError, setNameError] = useState('Поле name не может быть пустым');
+  const[linkError, setLinkError] = useState('Поле link не может быть пустым');
+
+  const blurHandler = (e) =>{
+    switch(e.target.name){
+      case 'name':
+        setNameDirty(true);
+        break
+      case 'link':
+        setLinkDirty(true);
+        break
+    }
+  }
+  const nameHandler = (e) =>{
+    setName(e.target.value)
+    const re = /^[a-zA-Zа-яА-Я]+$/ui;
+    if (!re.test(String(e.target.value).toLowerCase())){
+      setNameError('Не корректное имя')
+    } else {
+      setNameError('')
+    }
+  }
+  const linkHandler = (e) =>{
+    setLink(e.target.value)
+    const re = /^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/;
+    if (!re.test(String(e.target.value).toLowerCase())){
+      setLinkError('Не корректнаяссылка на картинку')
+    } else {
+      setLinkError('')
+    }
+  }
 
 
   return (
@@ -58,8 +95,13 @@ function AddPlacePopup(props) {
             maxLength="30" 
             value={nameCard}
             onChange={handleСhangeCardName}
+
+            // onChange={e => nameHandler(e)}
+            // onBlur={e => blurHandler(e)}
+            // value={name}
         />
-        <span className="popup__input-error place-title-input-error"></span>
+        {(nameDirty && nameError) && <span className="popup__input-error place-title-input-error">{nameError}</span>}
+        
       </div>
       <div className="form__field">
         <input 
@@ -71,8 +113,12 @@ function AddPlacePopup(props) {
           type="url" 
           value={linkCard}
           onChange={handleСhangeCardLink}
+
+          // onChange={e => linkHandler(e)}
+          // onBlur={e => blurHandler(e)}
+          // value={link}
         />
-        <span className="popup__input-error plaсe-img-input-error"></span>
+       {(linkDirty && linkError) && <span className="popup__input-error place-title-input-error">{linkError}</span>}
       </div>
     </PopupWithForm>
   )
