@@ -94,11 +94,12 @@ function AddPlacePopup(props) {
             minLength="2" 
             maxLength="30" 
             value={nameCard}
-            onChange={handleСhangeCardName}
-
-            // onChange={e => nameHandler(e)}
-            // onBlur={e => blurHandler(e)}
-            // value={name}
+            onChange={e => {
+              handleСhangeCardName(e)
+              nameHandler(e)
+            }}
+            onBlur={e => blurHandler(e)}
+            value={name}
         />
         {(nameDirty && nameError) && <span className="popup__input-error place-title-input-error">{nameError}</span>}
         
@@ -112,11 +113,12 @@ function AddPlacePopup(props) {
           required 
           type="url" 
           value={linkCard}
-          onChange={handleСhangeCardLink}
-
-          // onChange={e => linkHandler(e)}
-          // onBlur={e => blurHandler(e)}
-          // value={link}
+          onChange={e => {
+            handleСhangeCardLink(e)
+            linkHandler(e)
+          }}
+          onBlur={e => blurHandler(e)}
+          value={link}
         />
        {(linkDirty && linkError) && <span className="popup__input-error place-title-input-error">{linkError}</span>}
       </div>
