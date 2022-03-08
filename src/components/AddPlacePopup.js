@@ -99,7 +99,6 @@ function AddPlacePopup(props) {
               nameHandler(e)
             }}
             onBlur={e => blurHandler(e)}
-            value={name}
         />
         {(nameDirty && nameError) && <span className="popup__input-error place-title-input-error">{nameError}</span>}
         
@@ -118,7 +117,6 @@ function AddPlacePopup(props) {
             linkHandler(e)
           }}
           onBlur={e => blurHandler(e)}
-          value={link}
         />
        {(linkDirty && linkError) && <span className="popup__input-error place-title-input-error">{linkError}</span>}
       </div>

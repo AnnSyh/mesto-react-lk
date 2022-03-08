@@ -101,7 +101,6 @@ const blurHandler = (e) =>{
                     nameHandler(e)
                   }}
                 onBlur={e => blurHandler(e)}
-                value={userName}
               />
              {(userNameDirty && userNameError) && <span className="popup__input-error place-title-input-error">{userNameError}</span>}
           </div>
@@ -120,7 +119,6 @@ const blurHandler = (e) =>{
                             aboutHandler(e)
                           }}                         
                         onBlur={e => blurHandler(e)}  
-                        value={userAbout}                     
                 />
              {(userAboutDirty && userAboutError) && <span className="popup__input-error place-title-input-error">{userAboutError}</span>}
           </div>
