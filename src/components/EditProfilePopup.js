@@ -32,6 +32,44 @@ function EditProfilePopup(props){
         });
     };
 
+// валидация полей формы
+const[userName, setUserName] = useState('');
+const[userAbout, setUserAbout] = useState(''); 
+const[userNameDirty, setUserNameDirty] = useState('');
+const[userAboutDirty, setUserAboutDirty] = useState(''); 
+const[userNameError, setUserNameError] = useState('Поле name не может быть пустым');
+const[userAboutError, setUserAboutError] = useState('Поле about не может быть пустым');
+
+const blurHandler = (e) =>{
+    switch(e.target.name){
+      case 'title':
+        setUserNameDirty(true);
+        break
+      case 'subtitle':
+        setUserAboutDirty(true);
+        break
+    }
+  }
+
+  const nameHandler = (e) =>{
+    setUserName(e.target.value)
+    const re = /^[a-zA-Zа-яА-Я]+$/ui;
+    if (!re.test(String(e.target.value).toLowerCase())){
+      setUserNameError('Не корректное имя')
+    } else {
+      setUserNameError('')
+    }
+  }
+  const aboutHandler = (e) =>{
+    setUserAbout(e.target.value)
+    const re = /^[a-zA-Zа-яА-Я]+$/ui;
+    if (!re.test(String(e.target.value).toLowerCase())){
+      setUserAboutError('Не корректное имя')
+    } else {
+      setUserAboutError('')
+    }
+  }  
+
 
     return(
         <PopupWithForm 
@@ -58,9 +96,14 @@ function EditProfilePopup(props){
                 minLength="2"
                 maxLength="40" 
                 value={name|| ''}
-                onChange={handleChangeName}
+                onChange={e => {
+                    handleChangeName(e)
+                    nameHandler(e)
+                  }}
+                onBlur={e => blurHandler(e)}
+                value={userName}
               />
-            <span className="popup__input-error user-title-error"></span>
+             {(userNameDirty && userNameError) && <span className="popup__input-error place-title-input-error">{userNameError}</span>}
           </div>
           <div className="form__field">
               <input    placeholder="О себе" 
@@ -72,9 +115,14 @@ function EditProfilePopup(props){
                         minLength="2" 
                         maxLength="200" 
                         value={description || ''}
-                        onChange={handleChangeDescription}                        
+                        onChange={e => {
+                            handleChangeDescription(e)
+                            aboutHandler(e)
+                          }}                         
+                        onBlur={e => blurHandler(e)}  
+                        value={userAbout}                     
                 />
-            <span className="popup__input-error user-subtitle-error"></span>
+             {(userAboutDirty && userAboutError) && <span className="popup__input-error place-title-input-error">{userAboutError}</span>}
           </div>
         </PopupWithForm>
     )

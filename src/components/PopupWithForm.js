@@ -23,7 +23,7 @@ function PopupWithForm(props) {
 
                     {props.children}
                     
-                    <button className="popup__btn  111"
+                    <button className="popup__btn"
                         name="btn"
                         type="submit">{props.buttonText}</button>
                 </form>
